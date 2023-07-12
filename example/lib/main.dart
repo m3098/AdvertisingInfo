@@ -14,7 +14,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  AdvertisingInfo _advertisingInfo;
+  late AdvertisingInfo _advertisingInfo;
 
   @override
   void initState() {
@@ -23,7 +23,7 @@ class _MyAppState extends State<MyApp> {
   }
 
   Future<void> initPlatformState() async {
-    AdvertisingInfo advertisingInfo;
+    AdvertisingInfo? advertisingInfo;
     try {
       advertisingInfo = await AdvertisingInfo.read();
     } on PlatformException {
@@ -33,7 +33,7 @@ class _MyAppState extends State<MyApp> {
     if (!mounted) return;
 
     setState(() {
-      _advertisingInfo = advertisingInfo;
+      _advertisingInfo = advertisingInfo!;
     });
   }
 
@@ -52,7 +52,7 @@ class _MyAppState extends State<MyApp> {
             children: [
               Text('advertising id:'),
               Text(
-                '${_advertisingInfo?.id}',
+                '${_advertisingInfo.id}',
                 style: TextStyle(
                     color: Colors.blue,
                     fontSize: 12,
